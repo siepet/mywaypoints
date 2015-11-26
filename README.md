@@ -1,6 +1,6 @@
 # MyWaypoints
 
-## Easily configurable plugin to manage multiple waypoints in the server!
+## Easily configurable plugin to manage multiple waypoints on the server!
 
 Each waypoint is described by YAML files, e.g:
 Mesa.yaml:
