@@ -85,7 +85,11 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
      * @param waypointName name of the waypoint to add
      */
     private void addNewWaypoint(MyWaypointsManager waypointsManager, Player player, String waypointName){
-
+        double x = player.getLocation().getX();
+        double y = player.getLocation().getY();
+        double z = player.getLocation().getZ();
+        waypointsManager.addNewWaypoint(waypointName, x, y, z);
+        player.sendMessage("Added waypoint " + waypointName + " to server, nice!");
     }
 
     /**
