@@ -6,7 +6,7 @@
 
     <groupId>mywaypoints</groupId>
     <artifactId>MyWaypoints</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <build>
         <plugins>
             <plugin>

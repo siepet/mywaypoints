@@ -40,7 +40,7 @@ public class MyWaypointsManager {
 
     public void addNewWaypoint(String name, double x, double y, double z){
         Waypoint waypoint = new Waypoint(name, "", x, y, z);
-        myWaypoints.add(waypoint);
+        saveWaypointToFile(waypoint);
     }
 
     public void editWaypoint(String name, double x, double y, double z){
@@ -90,9 +90,9 @@ public class MyWaypointsManager {
             String waypointName = (String)jsonWaypoint.get("name");
             String waypointDescription = (String)jsonWaypoint.get("description");
             JSONArray location = (JSONArray)jsonWaypoint.get("location");
-            double x = Double.parseDouble(location.get(0).toString());
-            double y = Double.parseDouble(location.get(1).toString());
-            double z = Double.parseDouble(location.get(2).toString());
+            double x = Double.parseDouble(location.get(0).toString().split(":")[1]);
+            double y = Double.parseDouble(location.get(1).toString().split(":")[1]);
+            double z = Double.parseDouble(location.get(2).toString().split(":")[1]);
             waypoint = new Waypoint(waypointName, waypointDescription, x, y, z);
             logger.info("Added waypoint: " + waypointName);
         } catch (IOException e) {
@@ -106,8 +106,14 @@ public class MyWaypointsManager {
     }
 
     public void saveWaypointToFile(Waypoint waypoint){
-
-
+        try {
+            FileWriter fileWriter = new FileWriter(waypointsPath + waypoint.getWaypointName() + ".json");
+            fileWriter.write(waypoint.toJSON().toJSONString());
+            fileWriter.close();
+        } catch (IOException e){
+            e.getStackTrace();
+        }
+        logger.info("Saved " + waypoint.getWaypointName() + " to file successfully!");
     }
 
     public static void saveInitialSpawnWaypoint(String path, double x, double y, double z) {
