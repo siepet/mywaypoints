@@ -1,6 +1,6 @@
 name: MyWaypoints
 main: pl.siepet.mywaypoints.MyWaypoints
-version: 0.0.2
+version: 0.0.7
 author: siepet
 website: http://github.com/siepet
 commands:

@@ -1,12 +1,24 @@
 package pl.siepet.mywaypoints;
 
 
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
 public class MyWaypointsCommandExecutor implements CommandExecutor {
+    private final Logger logger;
+    private final String myWaypointsPath;
+
+    MyWaypointsCommandExecutor(Logger logger, String myWaypointsPath){
+        this.logger = logger;
+        this.myWaypointsPath = myWaypointsPath;
+    }
 
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] arguments) {
@@ -15,11 +27,23 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         }
 
         Player player = (Player)commandSender;
-        MyWaypointsManager waypointsManager = new MyWaypointsManager();
+        MyWaypointsManager waypointsManager = new MyWaypointsManager(logger, myWaypointsPath);
 
         if(arguments[0].equals("list")){
             listAllWaypoints(waypointsManager, player);
             return true;
+        }
+
+        ArrayList<Waypoint> myWaypoints =  waypointsManager.getMyWaypoints();
+        for(int i = 0; i < myWaypoints.size(); i++){
+            if(myWaypoints.get(i).getWaypointName().equals(arguments[0])){
+                moveToWaypoint(player, myWaypoints.get(i).getX(), myWaypoints.get(i).getY(), myWaypoints.get(i).getZ());
+                return true;
+            }
+        }
+
+        if(arguments.length < 2) {
+            return false;
         }
 
         if(arguments[0].equals("add")){
@@ -46,10 +70,10 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
      */
     private void listAllWaypoints(MyWaypointsManager waypointsManager, Player player){
         int waypointsCount = waypointsManager.getMyWaypoints().size();
-        String[] message = new String[waypointsCount];
+        String[] message = new String[waypointsCount + 1];
         message[0] = "Available waypoints: ";
-        for(int i = 1; i <= waypointsCount; i++){
-            message[i] = "Name: " + waypointsManager.getMyWaypoints().get(i - 1).getWaypointName();
+        for(int i = 0; i < waypointsCount; i++){
+            message[i + 1] = "Name: " + waypointsManager.getMyWaypoints().get(i).getWaypointName();
         }
         player.sendMessage(message);
     }
@@ -83,5 +107,18 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
      */
     private void deleteWaypoint(MyWaypointsManager waypointsManager, String waypointName){
 
+    }
+
+    /**
+     * Teleports player to waypoint location
+     * @param player who wants to be teleported
+     * @param x the X coordinate of waypoint's location
+     * @param y the Y coordinate of waypoint's location
+     * @param z the Z coordinate of waypoint's location
+     */
+    private void moveToWaypoint(Player player, double x, double y, double z){
+        World world = player.getLocation().getWorld();
+        player.teleport(new Location(world, x, y, z));
+        player.sendMessage("You have been teleported to waypoint!");
     }
 }

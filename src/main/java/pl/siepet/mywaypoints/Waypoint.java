@@ -1,6 +1,9 @@
 package pl.siepet.mywaypoints;
 
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 public class Waypoint {
     private String waypointName;
     private String waypointDescription;
@@ -54,5 +57,17 @@ public class Waypoint {
 
     public void setZ(double z) {
         this.z = z;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject self = new JSONObject();
+        self.put("name", getWaypointName());
+        self.put("description", getWaypointDescription());
+        JSONArray location = new JSONArray();
+        location.add("x: " + getX());
+        location.add("y: " + getY());
+        location.add("z: " + getZ());
+        self.put("location", location);
+        return self;
     }
 }
