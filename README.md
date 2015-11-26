@@ -18,6 +18,8 @@ location:
 ## Commands
 `/waypoint list` - lists all available waypoints
 
+`/waypoint name` - moves user to given waypoint's location
+
 `/waypoint add name` - adds new `name` waypoint with user's current location
 
 `/waypoint edit name` - saves user's current location as new location for waypoint with given name
