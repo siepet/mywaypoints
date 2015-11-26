@@ -2,15 +2,19 @@
 
 ## Easily configurable plugin to manage multiple waypoints on the server!
 
-Each waypoint is described by YAML files, e.g:
-Mesa.yaml:
+Each waypoint is described by JSON files, e.g:
+Mesa.json:
 ```
-name: Mesa
-description: Entrance to Mesa biome!
-location:
-  x: -347
-  y: 64
-  z: 527
+{
+  "name": "Mesa",
+  "description": "Entrance to Mesa biome!",
+  "location": [
+    "x: -346",
+    "y: 62",
+    "z: 1052"
+  ]
+}
+
 ```
 
 
