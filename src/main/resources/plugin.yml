@@ -1,5 +1,8 @@
 name: MyWaypoints
 main: pl.siepet.mywaypoints.MyWaypoints
-version: ${version}
+version: 0.0.2
+author: siepet
+website: http://github.com/siepet
 commands:
+  waypoint:
     
