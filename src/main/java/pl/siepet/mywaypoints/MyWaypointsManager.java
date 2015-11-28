@@ -10,7 +10,6 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class MyWaypointsManager {
@@ -29,34 +28,14 @@ public class MyWaypointsManager {
         return myWaypoints;
     }
 
-    public Waypoint getWaypointByName(String name){
-        for(int i = 0; i < myWaypoints.size(); i++){
-            if(myWaypoints.get(i).getWaypointName().equals(name)){
-                return myWaypoints.get(i);
-            }
-        }
-        return null;
-    }
-
-    public void addNewWaypoint(String name, double x, double y, double z){
+    public void addWaypoint(String name, double x, double y, double z){
         Waypoint waypoint = new Waypoint(name, "", x, y, z);
         saveWaypointToFile(waypoint);
     }
 
-    public void editWaypoint(String name, double x, double y, double z){
+    public void deleteWaypoint(String waypointName){
         for(int i = 0; i < myWaypoints.size(); i++){
-            if(myWaypoints.get(i).getWaypointName().equals(name)){
-                myWaypoints.get(i).setX(x);
-                myWaypoints.get(i).setY(y);
-                myWaypoints.get(i).setZ(y);
-                return;
-            }
-        }
-    }
-
-    public void deleteWaypoint(String name){
-        for(int i = 0; i < myWaypoints.size(); i++){
-            if(myWaypoints.get(i).getWaypointName().equals(name)){
+            if(myWaypoints.get(i).getWaypointName().equals(waypointName)){
                 myWaypoints.remove(i);
                 return;
             }
@@ -94,7 +73,7 @@ public class MyWaypointsManager {
             double y = Double.parseDouble(location.get(1).toString().split(":")[1]);
             double z = Double.parseDouble(location.get(2).toString().split(":")[1]);
             waypoint = new Waypoint(waypointName, waypointDescription, x, y, z);
-            logger.info("Added waypoint: " + waypointName);
+            logger.info("Loaded waypoint: " + waypointName);
         } catch (IOException e) {
             e.getStackTrace();
             return null;

@@ -95,7 +95,7 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         double x = player.getLocation().getX();
         double y = player.getLocation().getY();
         double z = player.getLocation().getZ();
-        waypointsManager.addNewWaypoint(waypointName, x, y, z);
+        waypointsManager.addWaypoint(waypointName, x, y, z);
         player.sendMessage("Added waypoint " + waypointName + " to server, nice!");
     }
 
@@ -110,7 +110,7 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         double newX = player.getLocation().getX();
         double newY = player.getLocation().getY();
         double newZ = player.getLocation().getZ();
-        waypointsManager.addNewWaypoint(waypointName, newX, newY, newZ);
+        waypointsManager.addWaypoint(waypointName, newX, newY, newZ);
         player.sendMessage("Waypoint " + waypointName + " updated successfully!");
     }
 

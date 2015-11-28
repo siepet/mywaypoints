@@ -1,7 +1,5 @@
 package pl.siepet.mywaypoints;
 
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -30,7 +28,6 @@ public class MyWaypoints extends JavaPlugin {
     }
 
     private void createBasicWaypoint() {
-
         File waypointsFolder = new File(myWaypointsPath);
         if(!waypointsFolder.exists()){
             if(waypointsFolder.mkdir()){
