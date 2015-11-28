@@ -57,6 +57,10 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
             addNewWaypoint(waypointsManager, player, waypointName, waypointDescription);
             return true;
         } else if(arguments[0].equals("edit")){
+            if(!waypointsManager.waypointExists(arguments[1])){
+                player.sendMessage("Given waypoint does not exist!");
+                return false;
+            }
             String waypointName = arguments[1];
             String waypointDescription;
             if(arguments.length == 3){
@@ -119,8 +123,6 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         waypointsManager.editWaypoint(waypointName, waypointDescription, newX, newY, newZ);
         player.sendMessage("Waypoint " + waypointName + " updated successfully!");
     }
-
-
 
     /**
      * Deletes waypoint from the server.

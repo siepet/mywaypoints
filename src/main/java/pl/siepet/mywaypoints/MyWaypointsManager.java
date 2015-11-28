@@ -32,6 +32,15 @@ public class MyWaypointsManager {
         saveWaypointToFile(waypoint);
     }
 
+    public boolean waypointExists(String waypointName){
+        for(int i = 0; i < myWaypoints.size(); i++){
+            if(myWaypoints.get(i).getWaypointName().equals(waypointName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void editWaypoint(String waypointName, String waypointDescription, double x, double y, double z){
         File jsonFile = new File(waypointsPath + waypointName + ".json");
         Waypoint waypoint = loadWaypointFromFile(jsonFile);
