@@ -52,7 +52,13 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
             return true;
         } else if(arguments[0].equals("edit")){
             String waypointName = arguments[1];
-            editWaypoint(waypointsManager, player, waypointName);
+            String waypointDescription;
+            if(arguments.length == 3){
+                waypointDescription = arguments[2];
+            } else {
+                waypointDescription = "No description yet.";
+            }
+            editWaypoint(waypointsManager, player, waypointName, waypointDescription);
             return true;
         } else if(arguments[0].equals("delete")){
             String waypointName = arguments[1];
@@ -73,7 +79,8 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         String[] message = new String[waypointsCount + 1];
         message[0] = "Available waypoints: ";
         for(int i = 0; i < waypointsCount; i++){
-            message[i + 1] = "Name: " + waypointsManager.getMyWaypoints().get(i).getWaypointName();
+            Waypoint waypoint = waypointsManager.getMyWaypoints().get(i);
+            message[i + 1] = "[" + i + "] name: " + waypoint.getWaypointName() + ", description: " + waypoint.getWaypointDescription();
         }
         player.sendMessage(message);
     }
@@ -97,8 +104,9 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
      * @param waypointsManager waypoints manager
      * @param player who wants to edit given waypoint
      * @param waypointName name of the waypoint to edit
+     * @param waypointDescription name of the waypoint to edit
      */
-    private void editWaypoint(MyWaypointsManager waypointsManager, Player player, String waypointName){
+    private void editWaypoint(MyWaypointsManager waypointsManager, Player player, String waypointName, String waypointDescription){
 
     }
 
