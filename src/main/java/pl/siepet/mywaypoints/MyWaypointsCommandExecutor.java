@@ -107,7 +107,11 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
      * @param waypointDescription name of the waypoint to edit
      */
     private void editWaypoint(MyWaypointsManager waypointsManager, Player player, String waypointName, String waypointDescription){
-
+        double newX = player.getLocation().getX();
+        double newY = player.getLocation().getY();
+        double newZ = player.getLocation().getZ();
+        waypointsManager.addNewWaypoint(waypointName, newX, newY, newZ);
+        player.sendMessage("Waypoint " + waypointName + " updated successfully!");
     }
 
 
