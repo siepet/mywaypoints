@@ -28,8 +28,8 @@ public class MyWaypointsManager {
         return myWaypoints;
     }
 
-    public void addWaypoint(String name, double x, double y, double z){
-        Waypoint waypoint = new Waypoint(name, "", x, y, z);
+    public void addWaypoint(String waypointName, String waypointDescription, double x, double y, double z){
+        Waypoint waypoint = new Waypoint(waypointName, waypointDescription, x, y, z);
         saveWaypointToFile(waypoint);
     }
 

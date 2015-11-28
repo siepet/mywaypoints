@@ -48,7 +48,13 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
 
         if(arguments[0].equals("add")){
             String waypointName = arguments[1];
-            addNewWaypoint(waypointsManager, player, waypointName);
+            String waypointDescription;
+            if(arguments.length == 3){
+                waypointDescription = arguments[2];
+            } else {
+                waypointDescription = "No description yet.";
+            }
+            addNewWaypoint(waypointsManager, player, waypointName, waypointDescription);
             return true;
         } else if(arguments[0].equals("edit")){
             String waypointName = arguments[1];
@@ -91,11 +97,11 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
      * @param waypointsManager waypoints manager
      * @param waypointName name of the waypoint to add
      */
-    private void addNewWaypoint(MyWaypointsManager waypointsManager, Player player, String waypointName){
+    private void addNewWaypoint(MyWaypointsManager waypointsManager, Player player, String waypointName, String waypointDescription){
         double x = player.getLocation().getX();
         double y = player.getLocation().getY();
         double z = player.getLocation().getZ();
-        waypointsManager.addWaypoint(waypointName, x, y, z);
+        waypointsManager.addWaypoint(waypointName, waypointDescription, x, y, z);
         player.sendMessage("Added waypoint " + waypointName + " to server, nice!");
     }
 
@@ -110,7 +116,7 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         double newX = player.getLocation().getX();
         double newY = player.getLocation().getY();
         double newZ = player.getLocation().getZ();
-        waypointsManager.addWaypoint(waypointName, newX, newY, newZ);
+        waypointsManager.addWaypoint(waypointName, waypointDescription, newX, newY, newZ);
         player.sendMessage("Waypoint " + waypointName + " updated successfully!");
     }
 
