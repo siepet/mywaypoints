@@ -5,4 +5,8 @@ author: siepet
 website: http://github.com/siepet
 commands:
   waypoint:
+    list: lists all waypoints
+    add: adds waypoint
+    edit: edits waypoint
+    delete: deletes waypoint
     
