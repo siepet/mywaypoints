@@ -21,7 +21,6 @@ public class MyWaypointsManager {
         this.logger = logger;
         this.waypointsPath = waypointsPath;
         myWaypoints = loadWaypointsFromFiles();
-
     }
 
     public ArrayList<Waypoint> getMyWaypoints(){
@@ -30,6 +29,18 @@ public class MyWaypointsManager {
 
     public void addWaypoint(String waypointName, String waypointDescription, double x, double y, double z){
         Waypoint waypoint = new Waypoint(waypointName, waypointDescription, x, y, z);
+        saveWaypointToFile(waypoint);
+    }
+
+    public void editWaypoint(String waypointName, String waypointDescription, double x, double y, double z){
+        File jsonFile = new File(waypointsPath + waypointName + ".json");
+        Waypoint waypoint = loadWaypointFromFile(jsonFile);
+        if(!waypoint.getWaypointDescription().equals(waypointDescription)) {
+            waypoint.setWaypointDescription(waypointDescription);
+        }
+        waypoint.setX(x);
+        waypoint.setY(y);
+        waypoint.setZ(z);
         saveWaypointToFile(waypoint);
     }
 

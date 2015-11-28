@@ -116,7 +116,7 @@ public class MyWaypointsCommandExecutor implements CommandExecutor {
         double newX = player.getLocation().getX();
         double newY = player.getLocation().getY();
         double newZ = player.getLocation().getZ();
-        waypointsManager.addWaypoint(waypointName, waypointDescription, newX, newY, newZ);
+        waypointsManager.editWaypoint(waypointName, waypointDescription, newX, newY, newZ);
         player.sendMessage("Waypoint " + waypointName + " updated successfully!");
     }
 
